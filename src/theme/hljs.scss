@@ -1,0 +1,6 @@
+html[data-theme="light"]{
+    @import "../../node_modules/highlight.js/scss/vs.scss";
+}
+html[data-theme="dark"]{
+    @import "../../node_modules/highlight.js/scss/monokai-sublime.scss";
+}

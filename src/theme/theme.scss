@@ -1,0 +1,27 @@
+$theme:(
+    light:(
+        color: #041e00,
+        background: #ebebff,
+        link-color: rgb(0, 0, 130),
+        link-hover-color: rgb(0, 0, 69),
+    ),
+    dark:(
+        color: #ddddff,
+        background: #031500,
+        link-color: rgb(90, 90, 255),
+        link-hover-color: rgb(146, 146, 255),
+    )
+);
+@import "./hljs.scss";
+$curTheme:"light";
+@mixin useTheme(){
+    @each $key, $value in $theme{
+        $curTheme: $key !global;
+        html[data-theme="#{$key}"] & {
+            @content;
+        }
+    }
+};
+@function getTheme($paramName){
+    @return map-get($map: map-get($theme, $curTheme), $key: $paramName)
+};

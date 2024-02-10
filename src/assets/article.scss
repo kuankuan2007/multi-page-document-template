@@ -1,0 +1,25 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    &::before {
+        opacity: 0.2;
+    }
+}
+@function repeat-character($char, $times) {
+    $result: "";
+    @for $i from 1 through $times {
+        $result: #{$result}#{$char};
+    }
+    @return "#{$result}";
+}
+@for $i from 1 through 6 {
+    h#{$i} {
+        &::before {
+            padding-right: #{0.2rem + (6-$i) * 0.1rem};
+            content: repeat-character("#",$i);
+        }
+    }
+}
