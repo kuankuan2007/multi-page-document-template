@@ -17,6 +17,7 @@ $curTheme:"light";
 @mixin useTheme(){
     @each $key, $value in $theme{
         $curTheme: $key !global;
+        
         html[data-theme="#{$key}"] & {
             @content;
         }

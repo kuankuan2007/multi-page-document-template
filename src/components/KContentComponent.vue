@@ -5,14 +5,14 @@
         <p class="title">
             <router-link :class="{
                 selected: props.select,
-            }" :to="'/' + props.parents.join('/')">{{ props.data.title }}</router-link>
+            }" :to="'/' + props.data.list.join('/')">{{ props.data.title }}</router-link>
             <k-icon @click="changeFold = !changeFold" v-if="props.data.subArticles" name="arrow-down" class="button" />
         </p>
         <k-auto-height-folding ref="autoHeightFolding" :fold="nowFold" v-if="props.data.subArticles">
             <ul>
                 <k-content-component @k-upgrade-height="() => { autoHeightFolding && autoHeightFolding.refreshHeight(), emit('k-upgrade-height') }"
                     v-for="subArticle, subArticleName in props.data.subArticles" :data="subArticle"
-                    :path-tree="pathTree.slice(1)" :parents="subArticleParents(subArticleName)"
+                    :path-tree="pathTree.slice(1)"
                     :fold="(pathTree[0] === subArticleName && pathTree.length === 1) || pathTree[0] !== subArticleName"
                     :select="pathTree.length === 1 && pathTree[0] === subArticleName" />
             </ul>
@@ -40,10 +40,6 @@ const props = defineProps({
         type: Boolean,
         default: false,
         required: false
-    }, parents: {
-        type: Array,
-        default: [],
-        required: false
     }
 })
 const autoHeightFolding = ref(null)
@@ -58,9 +54,7 @@ watchEffect(() => {
     props.fold
     changeFold.value = false
 })
-function subArticleParents(name) {
-    return props.parents.concat([name])
-}
+console.log(props.data)
 
 </script>
 <style scoped lang="scss">

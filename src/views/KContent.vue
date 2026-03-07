@@ -1,6 +1,6 @@
 <template>
   <div class="tree">
-    <p class="title"><k-content-component :parents="[]" :fold="false" :select="!pathTree.length" :data="content" :path-tree="pathTree"/></p>
+    <p class="title"><k-content-component :fold="false" :select="!pathTree.length" :data="content" :path-tree="pathTree"/></p>
   </div>
 </template>
 <script setup>

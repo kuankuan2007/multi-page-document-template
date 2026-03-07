@@ -1,5 +1,16 @@
 # 快速开始
 
+## 下载项目
+
+```bash
+git clone https://github.com/kuankuan2007/multi-page-document-template.git
+```
+
+或者从其他位置
+
+| [![Github](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/kuankuan2007/multi-page-document-template) | [![gitee](https://img.shields.io/badge/Gitee-rgb(199%2C29%2C35)?logo=gitee)](https://gitee.com/kuankuan2007/multi-page-document-template) | [![Static Badge](https://img.shields.io/badge/Gitab-rgb(226%2C67%2C41)?logo=gitlab)](https://gitlab.com/kuankuan2007/multi-page-document-template) |
+| --------------------------------------------------------------------------------------------------------------------------- | ---- | ---- |
+
 ## 环境配置
 
 本项目在Node 20.11.0 上开发，未再其他版本上测试。

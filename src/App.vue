@@ -13,7 +13,7 @@
         <router-view name="content" />
       </div>
       <div class="gap"></div>
-      <div class="article">
+      <div class="article" ref="articleDiv">
         <router-view name="article" />
       </div>
     </div>
@@ -45,8 +45,16 @@ function getTitie() {
   }
   return now.title
 }
+/**@type {import('vue').Ref<HTMLElement>} */
+const articleDiv = ref()
 router.beforeEach((to, from, next) => {
   showContentMenu.value = false
+  if (articleDiv.value) {
+    articleDiv.value.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
   next()
 })
 const showContentMenu = ref(false)
@@ -155,7 +163,8 @@ $header-height: 60px;
       padding: 0.5rem;
       left: 0;
       width: calc(100% - 1rem);
-
+      height: 100%;
+      overflow-y: scroll;
       .show-content-menu & {
         left: 100%;
       }

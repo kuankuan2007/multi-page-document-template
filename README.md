@@ -1,41 +1,25 @@
-# 快速开始
 
-本项目的示例内容即为本项目详细文档，你可以先启动项目，再阅读详细文档
+# Multi-page Document Template
 
-## 环境配置
+This template turns a long project doc into multiple Markdown pages and renders them as a sidebar + article viewer.
 
-本项目在Node 20.11.0 上开发，未再其他版本上测试。
+## Documentation
 
-如果你使用nvm管理node版本，你可以使用以下指令
+Tutorials, configuration and detailed guides: [Example](https://multi-page-document-template.pages.kuankuan.site/)
 
-```bash
-nvm use
-```
+## Start Dev Server (minimal)
 
-## 安装依赖
+Developed on Node `20.11.0` (see `.nvmrc`).
 
 ```bash
 npm i
-```
-
-**注意** : 本项目中存在对等依赖兼容性问题，目前该依赖作者未提供解决方案，敬请谅解。
-
-## 启动项目
-
-```bash
 npm run dev
 ```
 
-## 个性化配置
+---
 
-### 文档内容
+## License
 
-文档目录在 `src/content.js`下，每层目录配置的字段如下：
+Licensed under [MPL-2.0](https://opensource.org/license/mpl-2-0/).
 
-+ `title`: 文档标题
-+ `article`: 文档名称（文档放在 `src/articles`目录下）
-+ `subArticles`: 子文档列表
-
-### 主题
-
-文档主题在 `src/theme`下，在 `theme.scss`中配置颜色等信息，在 `theme.ts`中配置相关切换逻辑。
+> Note: the LOGO is copyrighted by the original author and is not granted for reuse.
