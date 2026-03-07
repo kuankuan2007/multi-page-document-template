@@ -9,7 +9,7 @@ Tutorials, configuration and detailed guides: [Example](https://multi-page-docum
 
 ## Start Dev Server (minimal)
 
-Developed on Node `20.11.0` (see `.nvmrc`).
+Developed on Node `24.14.0` (see `.nvmrc`).
 
 ```bash
 npm i

@@ -13,7 +13,7 @@ git clone https://github.com/kuankuan2007/multi-page-document-template.git
 
 ## 环境配置
 
-本项目在Node 20.11.0 上开发，未再其他版本上测试。
+本项目在Node 24.14.0 上开发，未再其他版本上测试。
 
 如果你使用nvm管理node版本，你可以使用以下指令
 
