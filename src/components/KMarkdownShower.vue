@@ -108,8 +108,9 @@ defineExpose({
 })
 </script>
 <style lang="scss">
-@import url("../../node_modules/katex/dist/katex.min.css");
-@import "../theme/theme.scss";
+@use 'sass:meta';
+@include meta.load-css('katex/dist/katex.min');
+
 
 .katex {
     padding-left: 5px;

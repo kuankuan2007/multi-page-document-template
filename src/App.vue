@@ -60,7 +60,6 @@ router.beforeEach((to, from, next) => {
 const showContentMenu = ref(false)
 </script>
 <style scoped lang="scss">
-@import "./theme/theme.scss";
 $layoutLimit: 800px;
 $header-height: 60px;
 

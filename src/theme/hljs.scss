@@ -1,6 +1,7 @@
+@use 'sass:meta';
 html[data-theme="light"]{
-    @import "../../node_modules/highlight.js/scss/vs.scss";
+    @include meta.load-css('highlight.js/scss/vs');
 }
 html[data-theme="dark"]{
-    @import "../../node_modules/highlight.js/scss/monokai-sublime.scss";
+    @include meta.load-css('highlight.js/scss/monokai-sublime');
 }

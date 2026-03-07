@@ -100,7 +100,7 @@ watchEffect(() => {
 
 </script>
 <style lang="scss">
-@import "../theme/theme.scss";
+
 
 .article-root {
   display: flex;

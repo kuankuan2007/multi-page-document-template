@@ -1,3 +1,4 @@
+@use "sass:map";
 $theme:(
     light:(
         color: #041e00,
@@ -12,7 +13,7 @@ $theme:(
         link-hover-color: rgb(146, 146, 255),
     )
 );
-@import "./hljs.scss";
+@use "./hljs.scss" as *;
 $curTheme:"light";
 @mixin useTheme(){
     @each $key, $value in $theme{
@@ -24,5 +25,5 @@ $curTheme:"light";
     }
 };
 @function getTheme($paramName){
-    @return map-get($map: map-get($theme, $curTheme), $key: $paramName)
+    @return map.get($map: map.get($theme, $curTheme), $key: $paramName)
 };

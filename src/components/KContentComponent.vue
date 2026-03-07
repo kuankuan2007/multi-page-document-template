@@ -58,7 +58,7 @@ console.log(props.data)
 
 </script>
 <style scoped lang="scss">
-@import "../theme/theme.scss";
+
 
 .selected {
     @include useTheme {

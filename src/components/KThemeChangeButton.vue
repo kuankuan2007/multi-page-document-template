@@ -17,7 +17,7 @@ function onClick(){
 }
 </script>
 <style scoped lang="scss">
-@import "../theme/theme.scss";
+
 .theme-icon{
     height: 30px;
     &:deep(svg){
