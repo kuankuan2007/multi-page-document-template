@@ -41,11 +41,11 @@ link-hover-color: rgb(146, 146, 255),//链接hover的样式
 配置对象格式：
 
 ```typescript
-type ThemeConfig={
-    onChangeIn:() => styleTheme,
-    onChangeOut?:() => void,
-    icon:string
-}
+type ThemeConfig = {
+  onChangeIn: () => styleTheme;
+  onChangeOut?: () => void;
+  icon: string;
+};
 ```
 
 theme和styleTheme的区别：
@@ -87,7 +87,7 @@ npm run load-fontello zip文件路径
 你可以在任意 scss 文件中使用
 
 ```scss
-@import "/src/theme/theme.scss";
+@import '/src/theme/theme.scss';
 ```
 
 然后使用混合 `useTheme`来包裹跟随主题动态变化的内容，在 `useTheme`中，你可以使用 `getTheme(name)`函数来获取当前主题配置的某个值
@@ -95,13 +95,13 @@ npm run load-fontello zip文件路径
 e.g.
 
 ```scss
-@import "/src/theme/theme.scss";
+@import '/src/theme/theme.scss';
 
 body {
-    /*与主题无关的样式*/
-    @include useTheme {
-        /*与主题有关的样式*/
-        color: getTheme("color");
-    }
+  /*与主题无关的样式*/
+  @include useTheme {
+    /*与主题有关的样式*/
+    color: getTheme('color');
+  }
 }
 ```

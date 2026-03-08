@@ -1,16 +1,30 @@
 <template>
-    <span class="demo-icon">{{ String.fromCharCode(config.glyphs.find((value, index) => {
-        return value.css == props.name
-    }).code) }}</span>
+  <div class="icon" :class="{ inline }">{{ String.fromCharCode(fontelloData[id]!) }}</div>
 </template>
-<script setup>
-import config from '../fontello/config.json'
-config.glyphs
-const props = defineProps({
-    name: {
-        type: String,
-        required: true
-    }
-})
+<script setup lang="ts">
+import fontelloData from '@/assets/fontello/data';
+defineProps({
+  id: {
+    required: true,
+    type: String,
+  },
+  inline: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@use '@/assets/fontello/fontello.scss';
+:root div.icon {
+  @include fontello.fontello;
+  user-select: none;
+  display: block;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  &.inline {
+    display: inline;
+  }
+}
+</style>

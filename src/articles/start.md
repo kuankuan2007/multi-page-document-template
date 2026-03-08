@@ -8,8 +8,8 @@ git clone https://github.com/kuankuan2007/multi-page-document-template.git
 
 或者从其他位置
 
-| [![Github](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/kuankuan2007/multi-page-document-template) | [![gitee](https://img.shields.io/badge/Gitee-rgb(199%2C29%2C35)?logo=gitee)](https://gitee.com/kuankuan2007/multi-page-document-template) | [![Static Badge](https://img.shields.io/badge/Gitab-rgb(226%2C67%2C41)?logo=gitlab)](https://gitlab.com/kuankuan2007/multi-page-document-template) |
-| --------------------------------------------------------------------------------------------------------------------------- | ---- | ---- |
+| [![Github](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/kuankuan2007/multi-page-document-template) | [![gitee](<https://img.shields.io/badge/Gitee-rgb(199%2C29%2C35)?logo=gitee>)](https://gitee.com/kuankuan2007/multi-page-document-template) | [![Static Badge](<https://img.shields.io/badge/Gitab-rgb(226%2C67%2C41)?logo=gitlab>)](https://gitlab.com/kuankuan2007/multi-page-document-template) |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## 环境配置
 
@@ -41,9 +41,9 @@ npm run dev
 
 文档目录在 `src/content.js`下，每层目录配置的字段如下：
 
-+ `title`: 文档标题
-+ `article`: 文档名称（文档放在 `src/articles`目录下）
-+ `subArticles`: 子文档列表
+- `title`: 文档标题
+- `article`: 文档名称（文档放在 `src/articles`目录下）
+- `subArticles`: 子文档列表
 
 ### 主题
 

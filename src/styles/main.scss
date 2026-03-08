@@ -1,0 +1,70 @@
+@use '@/assets/fontello/font-defines.scss';
+@use '@/styles/hljs.scss' as *;
+* {
+  transition: 0.3s;
+  transition-delay: 0s;
+}
+body {
+  @include useTheme {
+    background: getTheme('background');
+    color: getTheme('color');
+  }
+}
+a {
+  text-decoration: none;
+  transition:
+    0.3s 0s,
+    background-position 0s 0s;
+  background-position: right bottom;
+  background-size: 0% 2px;
+
+  &:hover {
+    background-size: 100% 2px;
+    background-position: left bottom;
+    @include useTheme {
+      color: getTheme('link-hover-color');
+    }
+  }
+  background-repeat: no-repeat;
+  @include useTheme {
+    color: getTheme('link-color');
+    background-image: linear-gradient(
+      to right,
+      getTheme('link-hover-color'),
+      getTheme('link-hover-color')
+    );
+  }
+}
+$scrollbar-width: 10px;
+
+::-webkit-scrollbar {
+  width: $scrollbar-width;
+  height: $scrollbar-width;
+  @include useTheme {
+    background: getTheme('background');
+  }
+}
+::-webkit-scrollbar-button {
+  display: none;
+  @include useTheme {
+    background-color: transparent;
+  }
+}
+::-webkit-scrollbar-track {
+  @include useTheme {
+    background-color: transparent;
+  }
+}
+::-webkit-scrollbar-track-piece {
+  @include useTheme {
+    background-color: transparent;
+  }
+}
+::-webkit-scrollbar-thumb {
+  @include useTheme {
+    background-color: getTheme('color');
+    border-radius: 99999px;
+    width: $scrollbar-width;
+    height: $scrollbar-width;
+  }
+}

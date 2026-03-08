@@ -1,7 +1,0 @@
-@use 'sass:meta';
-html[data-theme="light"]{
-    @include meta.load-css('highlight.js/scss/vs');
-}
-html[data-theme="dark"]{
-    @include meta.load-css('highlight.js/scss/monokai-sublime');
-}

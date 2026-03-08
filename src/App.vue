@@ -1,10 +1,16 @@
 <template>
-  <div class="page" :class="{
-    'show-content-menu': showContentMenu,
-  }">
+  <div
+    class="page"
+    :class="{
+      'show-content-menu': showContentMenu,
+    }"
+  >
     <header>
-      <k-icon @click="showContentMenu = !showContentMenu" class="show-content-menu-button"
-        :name="showContentMenu ? 'article' : 'menu'" />
+      <k-icon
+        @click="showContentMenu = !showContentMenu"
+        class="show-content-menu-button"
+        :id="showContentMenu ? 'article' : 'menu'"
+      />
       <h1>{{ getTitie() }}</h1>
       <k-theme-change-button />
     </header>
@@ -19,45 +25,44 @@
     </div>
   </div>
 </template>
-<script setup>
-import { ref } from "vue"
-import router from './router'
+<script setup lang="ts">
+import { ref } from 'vue';
+import router from './router';
 
-import { RouterView, useRoute, } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router';
 import content from './content';
-import KIcon from "./components/KIcon.vue";
+import KIcon from './components/KIcon.vue';
 import KThemeChangeButton from './components/KThemeChangeButton.vue';
 function getTitie() {
-  let pathTree = useRoute().params.pathMatch
+  let pathTree = useRoute().params.pathMatch;
   if (!Array.isArray(pathTree)) {
-    pathTree = [pathTree]
+    pathTree = [pathTree];
   }
   if (pathTree[pathTree.length - 1] === '') {
-    pathTree.pop()
+    pathTree.pop();
   }
-  let now = content
+  let now = content;
   for (const i of pathTree) {
+    if (!now.subArticles) return '404';
     if (i in now.subArticles) {
-      now = now.subArticles[i]
+      now = now.subArticles[i];
     } else {
-      return "404"
+      return '404';
     }
   }
-  return now.title
+  return now.title;
 }
-/**@type {import('vue').Ref<HTMLElement>} */
-const articleDiv = ref()
-router.beforeEach((to, from, next) => {
-  showContentMenu.value = false
+const articleDiv = useTemplateRef('articleDiv');
+router.beforeEach(() => {
+  showContentMenu.value = false;
   if (articleDiv.value) {
     articleDiv.value.scrollTo({
       top: 0,
-      behavior: 'smooth'
-    })
+      behavior: 'smooth',
+    });
   }
-  next()
-})
-const showContentMenu = ref(false)
+});
+const showContentMenu = ref(false);
 </script>
 <style scoped lang="scss">
 $layoutLimit: 800px;
@@ -71,7 +76,7 @@ $header-height: 60px;
   height: 100%;
   inset: 0;
 
-  &>header {
+  & > header {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: $header-height;
@@ -83,7 +88,7 @@ $header-height: 60px;
     padding-left: 1rem;
     padding-right: 1rem;
 
-    &>h1 {
+    & > h1 {
       text-align: center;
       flex-grow: 1;
       line-height: $header-height;
@@ -116,22 +121,22 @@ $header-height: 60px;
   display: flex;
   justify-content: start;
   position: relative;
-  &>.gap{
+  & > .gap {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 1px;
     height: 80%;
     align-self: center;
-    @include useTheme{
-      background: linear-gradient(to bottom, transparent, getTheme("color") 30% 70%, transparent);
+    @include useTheme {
+      background: linear-gradient(to bottom, transparent, getTheme('color') 30% 70%, transparent);
     }
   }
-  &>.content {
+  & > .content {
     flex-shrink: 0;
   }
 
   @media (max-width: #{$layoutLimit}) {
-    .gap{
+    .gap {
       opacity: 0;
       width: 0;
     }
@@ -142,10 +147,10 @@ $header-height: 60px;
       height: 100%;
 
       @include useTheme {
-        background: getTheme("background");
+        background: getTheme('background');
       }
 
-      &>* {
+      & > * {
         width: max-content;
       }
 
@@ -177,4 +182,5 @@ $header-height: 60px;
   flex-shrink: 1;
   overflow-x: hidden;
   column-gap: 2rem;
-}</style>
+}
+</style>
