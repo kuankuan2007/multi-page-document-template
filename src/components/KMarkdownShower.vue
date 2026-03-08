@@ -58,7 +58,7 @@ function copyCode(event: MouseEvent) {
     const tipEle = target.querySelector('.tip') as HTMLElement;
     console.log(target, tipEle);
     if (tipEle) {
-      tipEle.innerText = String.fromCharCode(data['ok']);
+      tipEle.innerText = String.fromCharCode(data['tick']);
       tipEle.classList.add('demo-icon');
       setTimeout(() => {
         tipEle.innerText = '复制';

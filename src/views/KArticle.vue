@@ -23,7 +23,7 @@
       >
         <p class="next-button-content">
           <span>{{ nextButton.contetn }}</span>
-          <k-icon class="next-button-icon" v-if="!nextButton.disabled" id="arrow-down" />
+          <k-icon class="next-button-icon" v-if="!nextButton.disabled" id="right" />
         </p>
       </div>
     </router-link>
@@ -177,9 +177,7 @@ watchEffect(() => {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    & > .next-button-icon {
-      transform: rotate(-90deg);
-    }
+
     column-gap: 0rem;
   }
   &:hover {
@@ -187,7 +185,7 @@ watchEffect(() => {
       column-gap: 2rem;
       margin-left: 1rem;
       & > .next-button-icon {
-        transform: rotate(-90deg) scale(1.5);
+        transform: scale(1.5);
       }
     }
   }

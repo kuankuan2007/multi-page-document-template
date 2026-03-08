@@ -16,7 +16,7 @@
       <k-icon
         @click="fold = !fold"
         v-if="Object.keys(props.data.subArticles).length > 0"
-        id="arrow-down"
+        id="down"
         class="button"
       />
     </p>
@@ -33,7 +33,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
 import KIcon from './KIcon.vue';
 import KContentComponent from './KContentComponent.vue';
 import KAutoHeightFolding from './KAutoHeightFolding.vue';

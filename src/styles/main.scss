@@ -1,9 +1,6 @@
 @use '@/assets/fontello/font-defines.scss';
 @use '@/styles/hljs.scss' as *;
-* {
-  transition: 0.3s;
-  transition-delay: 0s;
-}
+
 body {
   @include useTheme {
     background: getTheme('background');
