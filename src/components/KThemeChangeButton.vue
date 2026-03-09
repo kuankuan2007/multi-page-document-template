@@ -14,15 +14,13 @@
 </template>
 <script setup lang="ts">
 import KIcon from './KIcon.vue';
-import { themeValue, themeValueList } from '@/scripts/theme';
+import { themeValue, themeValueList } from '@kuankuan/assist-2026/theme';
 function changeToNextTheme() {
   themeValue.value =
     themeValueList[(themeValueList.indexOf(themeValue.value) + 1) % themeValueList.length]!;
 }
 </script>
 <style scoped lang="scss">
-@use '@/styles/theme' as *;
-
 button.theme-button {
   appearance: none;
   all: unset;
@@ -34,14 +32,14 @@ button.theme-button {
   border-radius: 0.3em;
 
   &:focus {
-    @include useTheme {
-      border-color: getTheme('active-color');
+    @include theme.use {
+      border-color: theme.get('active-color');
     }
   }
 
   &:hover {
-    @include useTheme {
-      color: getTheme('active-color');
+    @include theme.use {
+      color: theme.get('active-color');
     }
   }
 }

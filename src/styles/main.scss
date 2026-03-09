@@ -2,9 +2,9 @@
 @use '@/styles/hljs.scss' as *;
 
 body {
-  @include useTheme {
-    background: getTheme('background');
-    color: getTheme('color');
+  @include theme.use {
+    background: theme.get('background');
+    color: theme.get('color');
   }
 }
 a {
@@ -18,14 +18,14 @@ a {
   &:hover {
     background-size: 100% 2px;
     background-position: left bottom;
-    @include useTheme {
-      color: getTheme('active-color');
+    @include theme.use {
+      color: theme.get('active-color');
     }
   }
   background-repeat: no-repeat;
-  @include useTheme {
-    color: mixTheme('active-color', 'color', 70%);
-    background-image: linear-gradient(to right, getTheme('active-color'), getTheme('active-color'));
+  @include theme.use {
+    color: theme.mix('active-color', 'color', 70%);
+    background-image: linear-gradient(to right, theme.get('active-color'), theme.get('active-color'));
   }
 }
 $scrollbar-width: 10px;
@@ -33,29 +33,29 @@ $scrollbar-width: 10px;
 ::-webkit-scrollbar {
   width: $scrollbar-width;
   height: $scrollbar-width;
-  @include useTheme {
-    background: getTheme('background');
+  @include theme.use {
+    background: theme.get('background');
   }
 }
 ::-webkit-scrollbar-button {
   display: none;
-  @include useTheme {
+  @include theme.use {
     background-color: transparent;
   }
 }
 ::-webkit-scrollbar-track {
-  @include useTheme {
+  @include theme.use {
     background-color: transparent;
   }
 }
 ::-webkit-scrollbar-track-piece {
-  @include useTheme {
+  @include theme.use {
     background-color: transparent;
   }
 }
 ::-webkit-scrollbar-thumb {
-  @include useTheme {
-    background-color: getTheme('color');
+  @include theme.use {
+    background-color: theme.get('color');
     border-radius: 99999px;
     width: $scrollbar-width;
     height: $scrollbar-width;

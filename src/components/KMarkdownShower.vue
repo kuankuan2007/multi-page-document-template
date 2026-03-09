@@ -152,8 +152,8 @@ defineExpose({
       height: 16px;
       line-height: 16px;
 
-      @include useTheme {
-        background: rgba(getTheme('background'), 0.5);
+      @include theme.use {
+        background: rgba(theme.get('background'), 0.5);
       }
     }
   }
@@ -188,8 +188,8 @@ defineExpose({
     height: 16px;
     line-height: 16px;
 
-    @include useTheme {
-      background: rgba(getTheme('background'), 0.5);
+    @include theme.use {
+      background: rgba(theme.get('background'), 0.5);
     }
   }
 
@@ -215,15 +215,15 @@ defineExpose({
     transition: 0.3s;
     user-select: none;
 
-    @include useTheme {
-      background: mixTheme('background', 'color', 85%, 0.5);
-      color: getTheme('color');
+    @include theme.use {
+      background: theme.mix('background', 'color', 85%, 0.5);
+      color: theme.get('color');
     }
 
     &:hover {
-      @include useTheme {
-        color: mixTheme('active-color', 'color', 85%);
-        border-color: mixTheme('active-color', 'color', 85%);
+      @include theme.use {
+        color: theme.mix('active-color', 'color', 85%);
+        border-color: theme.mix('active-color', 'color', 85%);
       }
 
       & > .tip {
@@ -244,9 +244,9 @@ defineExpose({
       user-select: none;
       margin: 0;
       opacity: 0;
-      @include useTheme {
-        color: getTheme('background');
-        background: getTheme('color');
+      @include theme.use {
+        color: theme.get('background');
+        background: theme.get('color');
       }
 
       &::after {
@@ -259,8 +259,8 @@ defineExpose({
 
         height: $size;
 
-        @include useTheme {
-          background: getTheme('color');
+        @include theme.use {
+          background: theme.get('color');
         }
 
         -webkit-clip-path: polygon(100% 0, 0 0, 50% 100%);

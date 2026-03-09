@@ -141,8 +141,8 @@ watchEffect(() => {
 .next-button {
   min-height: 20vh;
 
-  @include useTheme {
-    background-image: linear-gradient(to left, getTheme('color'), getTheme('color'));
+  @include theme.use {
+    background-image: linear-gradient(to left, theme.get('color'), theme.get('color'));
   }
 
   flex-grow: 1;
@@ -236,9 +236,9 @@ watchEffect(() => {
       margin: 0.5rem 0 0.5rem 0;
     }
 
-    @include useTheme {
-      background: rgba(getTheme('color'), 0.05);
-      border-left: 0.5rem solid rgba(getTheme('color'), 0.3);
+    @include theme.use {
+      background: rgba(theme.get('color'), 0.05);
+      border-left: 0.5rem solid rgba(theme.get('color'), 0.3);
     }
   }
 }

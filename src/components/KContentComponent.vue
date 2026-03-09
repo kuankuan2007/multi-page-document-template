@@ -53,8 +53,8 @@ watch(
 </script>
 <style scoped lang="scss">
 .selected {
-  @include useTheme {
-    color: getTheme('color');
+  @include theme.use {
+    color: theme.get('color');
   }
 
   background-color: transparent;
@@ -76,9 +76,9 @@ watch(
   transition: 0.3s;
 
   &:hover {
-    @include useTheme {
-      border-color: mixTheme('active-color', 'color', 85%);
-      color: mixTheme('active-color', 'color', 85%);
+    @include theme.use {
+      border-color: theme.mix('active-color', 'color', 85%);
+      color: theme.mix('active-color', 'color', 85%);
     }
   }
 
@@ -96,8 +96,8 @@ ul {
   border-left-width: 1px;
   border-left-style: solid;
 
-  @include useTheme {
-    border-left-color: rgba(getTheme('color'), 0.3);
+  @include theme.use {
+    border-left-color: rgba(theme.get('color'), 0.3);
   }
 }
 </style>

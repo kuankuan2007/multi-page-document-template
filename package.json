@@ -7,11 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "load-fontello": "node ./assist/load-fontello.js",
+    "load-fontello": "load-fontello",
     "format": "prettier --write src/",
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@kuankuan/assist-2026": "^0.1.1",
     "highlight.js": "^11.11.1",
     "jiti": "^2.6.1",
     "katex": "^0.16.8",

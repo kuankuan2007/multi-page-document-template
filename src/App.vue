@@ -18,7 +18,6 @@
       <div class="content">
         <router-view name="content" />
       </div>
-      <div class="gap"></div>
       <div class="article" ref="articleDiv">
         <router-view name="article" />
       </div>
@@ -88,6 +87,10 @@ $header-height: 60px;
     padding-left: 1rem;
     padding-right: 1rem;
 
+    @include theme.use {
+      background: theme.mix('background', 'color', 90%);
+    }
+
     & > h1 {
       text-align: center;
       flex-grow: 1;
@@ -121,18 +124,12 @@ $header-height: 60px;
   display: flex;
   justify-content: start;
   position: relative;
-  & > .gap {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 1px;
-    height: 80%;
-    align-self: center;
-    @include useTheme {
-      background: linear-gradient(to bottom, transparent, getTheme('color') 30% 70%, transparent);
-    }
-  }
+
   & > .content {
     flex-shrink: 0;
+    @include theme.use {
+      background: theme.mix('background', 'color', 95%);
+    }
   }
 
   @media (max-width: #{$layoutLimit}) {
@@ -145,10 +142,6 @@ $header-height: 60px;
       width: 0%;
       overflow: hidden;
       height: 100%;
-
-      @include useTheme {
-        background: getTheme('background');
-      }
 
       & > * {
         width: max-content;

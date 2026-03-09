@@ -90,7 +90,7 @@ npm run load-fontello zip文件路径
 @import '/src/theme/theme.scss';
 ```
 
-然后使用混合 `useTheme`来包裹跟随主题动态变化的内容，在 `useTheme`中，你可以使用 `getTheme(name)`函数来获取当前主题配置的某个值
+然后使用混合 `theme.use`来包裹跟随主题动态变化的内容，在 `theme.use`中，你可以使用 `theme.get(name)`函数来获取当前主题配置的某个值
 
 e.g.
 
@@ -99,9 +99,9 @@ e.g.
 
 body {
   /*与主题无关的样式*/
-  @include useTheme {
+  @include theme.use {
     /*与主题有关的样式*/
-    color: getTheme('color');
+    color: theme.get('color');
   }
 }
 ```
