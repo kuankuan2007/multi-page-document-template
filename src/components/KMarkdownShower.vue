@@ -216,14 +216,14 @@ defineExpose({
     user-select: none;
 
     @include useTheme {
-      background: rgba(getTheme('background'), 0.5);
-      color: getTheme('link-color');
+      background: mixTheme('background', 'color', 85%, 0.5);
+      color: getTheme('color');
     }
 
     &:hover {
       @include useTheme {
-        color: getTheme('link-hover-color');
-        border-color: getTheme('link-hover-color');
+        color: mixTheme('active-color', 'color', 85%);
+        border-color: mixTheme('active-color', 'color', 85%);
       }
 
       & > .tip {

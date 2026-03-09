@@ -22,7 +22,6 @@ function changeToNextTheme() {
 </script>
 <style scoped lang="scss">
 @use '@/styles/theme' as *;
-@use 'sass:color';
 
 button.theme-button {
   appearance: none;

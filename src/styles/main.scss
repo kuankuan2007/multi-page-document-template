@@ -19,17 +19,13 @@ a {
     background-size: 100% 2px;
     background-position: left bottom;
     @include useTheme {
-      color: getTheme('link-hover-color');
+      color: getTheme('active-color');
     }
   }
   background-repeat: no-repeat;
   @include useTheme {
-    color: getTheme('link-color');
-    background-image: linear-gradient(
-      to right,
-      getTheme('link-hover-color'),
-      getTheme('link-hover-color')
-    );
+    color: mixTheme('active-color', 'color', 70%);
+    background-image: linear-gradient(to right, getTheme('active-color'), getTheme('active-color'));
   }
 }
 $scrollbar-width: 10px;

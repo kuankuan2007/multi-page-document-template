@@ -69,14 +69,16 @@ watch(
 
 .button {
   cursor: pointer;
-  border: solid 2px transparent;
+  border: solid 0.12em transparent;
   border-radius: 999px;
   padding: 2px;
   display: block;
+  transition: 0.3s;
 
   &:hover {
     @include useTheme {
-      border-color: getTheme('color');
+      border-color: mixTheme('active-color', 'color', 85%);
+      color: mixTheme('active-color', 'color', 85%);
     }
   }
 
