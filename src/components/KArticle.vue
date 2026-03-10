@@ -160,11 +160,11 @@ watch(
   &.page-leave-active {
     transition: 0.3s;
   }
-  &.page-enter-from{
+  &.page-enter-from {
     transform: translateX(100%);
     opacity: 0;
   }
-  &.page-leave-to{
+  &.page-leave-to {
     transform: translateX(-100%);
     user-select: none;
     pointer-events: none;

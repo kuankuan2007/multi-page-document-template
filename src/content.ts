@@ -12,15 +12,32 @@ const content: ArticleOptions = {
       article: 'start.md',
       title: '快速开始',
     },
-    project: {
-      article: 'project.md',
-      title: '关于',
+    detail: {
+      article: 'detail/index.md',
+      title: '项目细节',
       subArticles: {
-        thanks: {
-          article: 'thanks.md',
-          title: '致谢',
+        theme: {
+          article: 'detail/theme.md',
+          title: '主题',
+        },
+        content: {
+          article: 'detail/content.md',
+          title: '内容系统',
+        },
+        tooling: {
+          article: 'detail/tooling.md',
+          title: '工程化',
         },
       },
+    },
+    test: {
+      article: 'test.md',
+      title: '测试',
+    },
+
+    thanks: {
+      article: 'thanks.md',
+      title: '致谢',
     },
   },
 };

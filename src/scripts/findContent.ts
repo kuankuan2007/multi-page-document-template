@@ -9,7 +9,7 @@ export type Article = {
   subArticles: Record<string, Article>;
 };
 
-function buildArticle(options: ArticleOptions):Article {
+function buildArticle(options: ArticleOptions): Article {
   let lastValue: Article | null = null;
   const dfs = (option: ArticleOptions, parents: string[], id: string | null = null) => {
     const res: Article = {
@@ -50,9 +50,9 @@ export default function (pathTree: (string | null)[]) {
   return now;
 }
 export function getPathTree(pathMatch: string | string[]) {
-  const pathTree: (string | null)[] = (
-    Array.isArray(pathMatch) ? pathMatch : [pathMatch]
-  ).filter((i) => i);
+  const pathTree: (string | null)[] = (Array.isArray(pathMatch) ? pathMatch : [pathMatch]).filter(
+    (i) => i
+  );
   pathTree.unshift(null);
   return pathTree;
 }

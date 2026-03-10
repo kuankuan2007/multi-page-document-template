@@ -39,12 +39,12 @@ npm run dev
 
 ### 文档内容
 
-文档目录在 `src/content.js`下，每层目录配置的字段如下：
+文档目录在 `src/content.ts`中，配置内容见`ArticleOptions`类型定义：
 
-- `title`: 文档标题
-- `article`: 文档名称（文档放在 `src/articles`目录下）
+- `title`: 文档标题，如：`快速开始`
+- `article`: 文档名称（文档放在 `src/articles`目录下），如：`start.md`
 - `subArticles`: 子文档列表
 
 ### 主题
 
-文档主题在 `src/theme`下，在 `theme.scss`中配置颜色等信息，在 `theme.ts`中配置相关切换逻辑。
+本项目所有主题相关的配置使用[@kuankuan/assist-2026](https://github.com/kuankuan2007/assist-2026)库中提供的代码，这也是宽宽几乎所有项目都在使用的主题管理方式。

@@ -1,8 +1,8 @@
-@use "@kuankuan/assist-2026/styles/theme.scss";
+@use '@kuankuan/assist-2026/styles/theme.scss';
 @mixin use() {
-  @include theme.use{
+  @include theme.use {
     @content;
-  };
+  }
 }
 @function get($paramName) {
   @return theme.get($paramName);

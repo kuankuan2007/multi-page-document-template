@@ -11,6 +11,5 @@ import { article } from '@/scripts/findContent';
 defineProps<{
   pathTree: (string | null)[];
 }>();
-
 </script>
 <style scoped lang="scss"></style>
