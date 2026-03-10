@@ -6,7 +6,7 @@
       loading: loading,
     }"
   >
-    <k-markdown-shower class="article-shower" :content="article" />
+    <k-markdown-shower class="article-shower" :content="articleContent" />
     <router-link :to="'/' + nextButton.to" custom v-slot="{ navigate }">
       <div
         @click="
@@ -33,12 +33,13 @@
 import { RouterLink } from 'vue-router';
 import KMarkdownShower from '@/components/KMarkdownShower.vue';
 import KIcon from '../components/KIcon.vue';
-import findContent from '@/scripts/findContent';
+import findContent, { type Article } from '@/scripts/findContent';
 const props = defineProps<{
-  pathMatch: string | string[];
+  pathTree: (string | null)[];
+  article: Article;
 }>();
 
-const article = ref('Loading');
+const articleContent = ref('Loading');
 const noArticle = ref(true);
 const loading = ref(true);
 const nextButton = reactive({
@@ -47,15 +48,9 @@ const nextButton = reactive({
   to: '',
   hidden: false,
 });
-const pathTree = computed(() => {
-  const pathTree = Array.isArray(props.pathMatch) ? props.pathMatch : [props.pathMatch];
-  if (pathTree[pathTree.length - 1] === '') {
-    pathTree.pop();
-  }
-  return pathTree;
-});
+
 watchEffect(() => {
-  const nowContent = findContent(pathTree.value);
+  const nowContent = props.article;
   if (nowContent === null) {
     nextButton.disabled = false;
     nextButton.contetn = 'No Data';
@@ -76,7 +71,7 @@ watchEffect(() => {
   }
 });
 const articleName = computed(() => {
-  const nowContent = findContent(pathTree.value);
+  const nowContent = findContent(props.pathTree);
   if (nowContent === null) {
     return '404.md';
   }
@@ -88,19 +83,19 @@ function getArticleURL() {
 watchEffect(() => {
   noArticle.value = true;
   loading.value = true;
-  article.value = 'Loading';
+  articleContent.value = 'Loading';
   fetch(getArticleURL()).then(
     async (res) => {
       loading.value = false;
       if (res.ok) {
-        article.value = await res.text();
+        articleContent.value = await res.text();
         noArticle.value = false;
       } else {
-        article.value = 'Get Article Failed';
+        articleContent.value = 'Get Article Failed';
       }
     },
     () => {
-      article.value = 'Get Article Failed';
+      articleContent.value = 'Get Article Failed';
     }
   );
 });

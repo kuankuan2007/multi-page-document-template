@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import KArticle from '@/views/KArticle.vue';
-import KContent from '@/views/KContent.vue';
-
+import KMain from '@/views/KMain.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -9,10 +7,7 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'arical',
       props: true,
-      components: {
-        content: KContent,
-        article: KArticle,
-      },
+      component: KMain,
     },
   ],
 });

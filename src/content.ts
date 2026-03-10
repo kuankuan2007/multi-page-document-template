@@ -24,4 +24,8 @@ const content: ArticleOptions = {
     },
   },
 };
+export const notFound: ArticleOptions = {
+  article: '404.md',
+  title: 'Not Found',
+};
 export default content;

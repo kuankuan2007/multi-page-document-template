@@ -8,15 +8,9 @@
 <script setup lang="ts">
 import KContentComponent from '../components/KContentComponent.vue';
 import { article } from '@/scripts/findContent';
-const props = defineProps<{
-  pathMatch: string[] | string;
+defineProps<{
+  pathTree: (string | null)[];
 }>();
-const pathTree = computed(() => {
-  const pathTree: (string | null)[] = (
-    Array.isArray(props.pathMatch) ? props.pathMatch : [props.pathMatch]
-  ).filter((i) => i);
-  pathTree.unshift(null);
-  return pathTree;
-});
+
 </script>
 <style scoped lang="scss"></style>

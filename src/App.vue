@@ -11,46 +11,21 @@
         class="show-content-menu-button"
         :id="showContentMenu ? 'article' : 'menu'"
       />
-      <h1>{{ getTitie() }}</h1>
+      <h1>{{ title }}</h1>
       <k-theme-change-button />
     </header>
-    <div class="main">
-      <div class="content">
-        <router-view name="content" />
-      </div>
-      <div class="article" ref="articleDiv">
-        <router-view name="article" />
-      </div>
-    </div>
+    <router-view v-slot="{ Component }">
+      <component :is="Component" @update:title="title = $event" />
+    </router-view>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
 import router from './router';
 
-import { RouterView, useRoute } from 'vue-router';
-import content from './content';
 import KIcon from './components/KIcon.vue';
 import KThemeChangeButton from './components/KThemeChangeButton.vue';
-function getTitie() {
-  let pathTree = useRoute().params.pathMatch;
-  if (!Array.isArray(pathTree)) {
-    pathTree = [pathTree];
-  }
-  if (pathTree[pathTree.length - 1] === '') {
-    pathTree.pop();
-  }
-  let now = content;
-  for (const i of pathTree) {
-    if (!now.subArticles) return '404';
-    if (i in now.subArticles) {
-      now = now.subArticles[i];
-    } else {
-      return '404';
-    }
-  }
-  return now.title;
-}
+const title = ref('');
 const articleDiv = useTemplateRef('articleDiv');
 router.beforeEach(() => {
   showContentMenu.value = false;
@@ -115,65 +90,5 @@ $header-height: 60px;
       pointer-events: none;
     }
   }
-}
-
-.main {
-  width: 100%;
-  height: calc(100% - $header-height);
-  flex-grow: 1;
-  display: flex;
-  justify-content: start;
-  position: relative;
-
-  & > .content {
-    flex-shrink: 0;
-    @include theme.use {
-      background: theme.mix('background', 'color', 95%);
-    }
-  }
-
-  @media (max-width: #{$layoutLimit}) {
-    .gap {
-      opacity: 0;
-      width: 0;
-    }
-    .content {
-      position: absolute;
-      width: 0%;
-      overflow: hidden;
-      height: 100%;
-
-      & > * {
-        width: max-content;
-      }
-
-      .show-content-menu & {
-        width: 100%;
-        position: absolute;
-        overflow: auto;
-      }
-    }
-
-    .article {
-      flex-grow: 1;
-      position: absolute;
-      padding: 0.5rem;
-      left: 0;
-      width: calc(100% - 1rem);
-      height: 100%;
-      overflow-y: scroll;
-      .show-content-menu & {
-        left: 100%;
-      }
-    }
-  }
-}
-
-.article {
-  overflow-y: scroll;
-  flex-grow: 1;
-  flex-shrink: 1;
-  overflow-x: hidden;
-  column-gap: 2rem;
 }
 </style>

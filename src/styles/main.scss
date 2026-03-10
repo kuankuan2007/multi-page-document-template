@@ -25,7 +25,11 @@ a {
   background-repeat: no-repeat;
   @include theme.use {
     color: theme.mix('active-color', 'color', 70%);
-    background-image: linear-gradient(to right, theme.get('active-color'), theme.get('active-color'));
+    background-image: linear-gradient(
+      to right,
+      theme.get('active-color'),
+      theme.get('active-color')
+    );
   }
 }
 $scrollbar-width: 10px;

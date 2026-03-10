@@ -1,4 +1,4 @@
-import content, { type ArticleOptions } from '../content';
+import content, { type ArticleOptions, notFound } from '../content';
 
 export type Article = {
   article: string;
@@ -9,7 +9,7 @@ export type Article = {
   subArticles: Record<string, Article>;
 };
 
-export const article = (() => {
+function buildArticle(options: ArticleOptions):Article {
   let lastValue: Article | null = null;
   const dfs = (option: ArticleOptions, parents: string[], id: string | null = null) => {
     const res: Article = {
@@ -29,17 +29,34 @@ export const article = (() => {
     }
     return res;
   };
-  return dfs(content, []);
-})();
+  return dfs(options, []);
+}
 
-export default function (nameList: string[]) {
-  let nowContent = article;
-  for (const i of nameList) {
-    if (nowContent.subArticles && i in nowContent.subArticles) {
-      nowContent = nowContent.subArticles[i];
+export const article = buildArticle(content);
+export const notFoundArticle = buildArticle(notFound);
+
+export default function (pathTree: (string | null)[]) {
+  if (pathTree[0] !== null) {
+    throw new Error('pathTree[0] must be null');
+  }
+  let now = article;
+  for (const i of pathTree.slice(1)) {
+    if (now.subArticles && (i as string) in now.subArticles) {
+      now = now.subArticles[i as string];
     } else {
-      return null;
+      return notFoundArticle;
     }
   }
-  return nowContent;
+  return now;
+}
+export function getPathTree(pathMatch: string | string[]) {
+  const pathTree: (string | null)[] = (
+    Array.isArray(pathMatch) ? pathMatch : [pathMatch]
+  ).filter((i) => i);
+  pathTree.unshift(null);
+  return pathTree;
+}
+export function getPathTreeFromPath(path: string) {
+  const pathMatch = path.split('/').filter((i) => i);
+  return getPathTree(pathMatch);
 }
