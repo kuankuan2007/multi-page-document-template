@@ -1,240 +1,174 @@
 <template>
-  <div
-    class="article-root"
-    :class="{
-      'no-article': noArticle,
-      loading: loading,
-    }"
-  >
-    <k-markdown-shower class="article-shower" :content="articleContent" />
-    <router-link :to="'/' + nextButton.to" custom v-slot="{ navigate }">
-      <div
-        @click="
-          () => {
-            navigate();
-            nextButton.disabled = true;
-          }
-        "
-        class="next-button"
-        :class="{
-          disabled: nextButton.disabled,
-          hidden: nextButton.hidden,
-        }"
-      >
-        <p class="next-button-content">
-          <span>{{ nextButton.contetn }}</span>
-          <k-icon class="next-button-icon" v-if="!nextButton.disabled" id="right" />
-        </p>
-      </div>
-    </router-link>
+  <div class="article-root">
+    <transition-group name="page" :duration="300">
+      <k-article-page
+        class="page-item"
+        v-for="page in pages"
+        v-bind="page.config"
+        :key="page.key"
+      />
+    </transition-group>
   </div>
 </template>
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
-import KMarkdownShower from '@/components/KMarkdownShower.vue';
-import KIcon from '../components/KIcon.vue';
-import findContent, { type Article } from '@/scripts/findContent';
+import { type Article } from '@/scripts/findContent';
+import KArticlePage from './KArticlePage.vue';
+
 const props = defineProps<{
-  pathTree: (string | null)[];
-  article: Article;
+  article?: Article;
 }>();
+const nextButtonStateNoData = {
+  type: 'no-data',
+} as const;
+type PageConfig = {
+  articleContent: string;
+  blockInfo: undefined | 'loading' | 'invalid' | 'failed';
+  nextButtonState: {
+    type: 'normal' | 'no-data';
+    content?: string;
+    to?: string;
+  };
+};
+const specialPageConfig = {
+  loading: {
+    articleContent: '',
+    blockInfo: 'loading',
+    nextButtonState: { type: 'no-data' },
+  },
+  invalid: {
+    articleContent: '',
+    blockInfo: 'invalid',
+    nextButtonState: { type: 'no-data' },
+  },
+  failed: {
+    articleContent: '',
+    blockInfo: 'failed',
+    nextButtonState: { type: 'no-data' },
+  },
+} as const;
+const pages = reactive<
+  {
+    config: PageConfig;
+    key: string;
+    active: boolean;
+  }[]
+>([
+  {
+    config: specialPageConfig.loading,
+    key: '__init__',
+    active: true,
+  },
+]);
 
-const articleContent = ref('Loading');
-const noArticle = ref(true);
-const loading = ref(true);
-const nextButton = reactive({
-  disabled: true,
-  contetn: 'Loading',
-  to: '',
-  hidden: false,
+const articleRawLoaders = import.meta.glob('../articles/**/*.md', {
+  query: '?raw',
+  import: 'default',
 });
 
-watchEffect(() => {
-  const nowContent = props.article;
-  if (nowContent === null) {
-    nextButton.disabled = false;
-    nextButton.contetn = 'No Data';
-    nextButton.to = '/';
-    nextButton.hidden = true;
-  } else {
-    if (nowContent.nextValue) {
-      nextButton.disabled = false;
-      nextButton.hidden = false;
-      nextButton.contetn = nowContent.nextValue.title;
-      nextButton.to = nowContent.nextValue.list.join('/');
-    } else {
-      nextButton.disabled = true;
-      nextButton.hidden = false;
-      nextButton.contetn = 'No Next Page';
-      nextButton.to = '/';
-    }
+function normalizeArticlePath(path: string) {
+  const normalized = path.replace(/^\/+/, '').replace(/^\.\//, '');
+  if (normalized.split('/').some((segment) => segment === '..')) {
+    throw new Error('Invalid article path');
   }
-});
-const articleName = computed(() => {
-  const nowContent = findContent(props.pathTree);
-  if (nowContent === null) {
-    return '404.md';
-  }
-  return nowContent.article;
-});
-function getArticleURL() {
-  return new URL(`../articles/${articleName.value}`, import.meta.url);
+  return normalized;
 }
-watchEffect(() => {
-  noArticle.value = true;
-  loading.value = true;
-  articleContent.value = 'Loading';
-  fetch(getArticleURL()).then(
-    async (res) => {
-      loading.value = false;
-      if (res.ok) {
-        articleContent.value = await res.text();
-        noArticle.value = false;
-      } else {
-        articleContent.value = 'Get Article Failed';
-      }
-    },
-    () => {
-      articleContent.value = 'Get Article Failed';
+
+let pageKey = 0;
+function pushPage(config: PageConfig) {
+  pages.splice(0, pages.length);
+  pages.push({
+    config,
+    key: String(pageKey++),
+    active: true,
+  });
+}
+function disablePage() {
+  pages.forEach((page) => {
+    if (page.config.blockInfo) return;
+    page.active = false;
+  });
+}
+
+let loadSeq = 0;
+
+watch(
+  () => props.article,
+  (article, oldArticle, onCleanup) => {
+    void oldArticle;
+
+    const seq = ++loadSeq;
+    let cancelled = false;
+    onCleanup(() => {
+      cancelled = true;
+    });
+
+    disablePage();
+    const articlePath = article?.article;
+    if (!articlePath) {
+      pushPage(specialPageConfig.invalid);
+      return;
     }
-  );
-});
+
+    let key: string;
+    try {
+      key = `../articles/${normalizeArticlePath(articlePath)}`;
+    } catch {
+      pushPage(specialPageConfig.invalid);
+      return;
+    }
+
+    const loader = articleRawLoaders[key];
+    if (!loader) {
+      pushPage(specialPageConfig.failed);
+      return;
+    }
+
+    (async () => {
+      try {
+        const raw = (await loader()) as string;
+        if (cancelled || seq !== loadSeq) return;
+        pushPage({
+          articleContent: raw,
+          blockInfo: void 0,
+          nextButtonState: article.nextValue
+            ? {
+                type: 'normal',
+                content: article.nextValue.title,
+                to: article.nextValue.list.join('/'),
+              }
+            : nextButtonStateNoData,
+        });
+      } catch {
+        if (cancelled || seq !== loadSeq) return;
+        pushPage(specialPageConfig.failed);
+      }
+    })();
+  },
+  {
+    deep: true,
+    immediate: true,
+  }
+);
 </script>
 <style lang="scss">
-.article-root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  &.no-article {
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    & > .article-shower {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      text-align: center;
-    }
-  }
-  &.loading {
-    & > .article-shower {
-      animation: loading 0.5s linear infinite alternate;
-      @keyframes loading {
-        from {
-          opacity: 1;
-        }
-        to {
-          opacity: 0.4;
-        }
-      }
-    }
-  }
-}
-
-.next-button {
-  min-height: 20vh;
-
-  @include theme.use {
-    background-image: linear-gradient(to left, theme.get('color'), theme.get('color'));
-  }
-
-  flex-grow: 1;
-  background-size: 25% 1px;
-  background-position: top center;
-  user-select: none;
-
-  cursor: pointer;
-
-  &.disabled {
-    pointer-events: none;
-
-    & > .next-button-content {
-      opacity: 0.3;
-    }
-  }
-
-  &.hidden {
-    display: none;
-  }
-
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  & > .next-button-content {
-    font-size: 1.5rem;
-    margin: 0;
-    margin-bottom: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
+.page-item {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  opacity: 1;
+  &.page-enter-active,
+  &.page-leave-active {
     transition: 0.3s;
-
-    column-gap: 0rem;
-    .next-button-icon {
-      transition: 0.3s;
-    }
   }
-  &:hover {
-    & > .next-button-content {
-      column-gap: 2rem;
-      margin-left: 1rem;
-      & > .next-button-icon {
-        transform: scale(1.5);
-      }
-    }
+  &.page-enter-from{
+    transform: translateX(100%);
+    opacity: 0;
   }
-}
-
-.article-shower {
-  padding: 1rem;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    &::before {
-      opacity: 0.2;
-    }
-  }
-
-  @function repeat-character($char, $times) {
-    $result: '';
-
-    @for $i from 1 through $times {
-      $result: #{$result}#{$char};
-    }
-
-    @return '#{$result}';
-  }
-
-  @for $i from 1 through 6 {
-    h#{$i} {
-      &::before {
-        padding-right: #{0.2rem + (6-$i) * 0.1rem};
-        content: repeat-character('#', $i);
-      }
-    }
-  }
-
-  blockquote {
-    margin: 0 0 0 0.5rem;
-    padding: 1px 0 1px 0.5rem;
-
-    & p {
-      margin: 0.5rem 0 0.5rem 0;
-    }
-
-    @include theme.use {
-      background: rgba(theme.get('color'), 0.05);
-      border-left: 0.5rem solid rgba(theme.get('color'), 0.3);
-    }
+  &.page-leave-to{
+    transform: translateX(-100%);
+    user-select: none;
+    pointer-events: none;
+    opacity: 0;
   }
 }
 </style>

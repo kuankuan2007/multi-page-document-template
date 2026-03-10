@@ -78,7 +78,6 @@ $header-height: 60px;
       left: 0;
       width: calc(100% - 1rem);
       height: 100%;
-      overflow-y: scroll;
       .show-content-menu & {
         left: 100%;
       }
@@ -87,10 +86,10 @@ $header-height: 60px;
 }
 
 .article {
-  overflow-y: scroll;
   flex-grow: 1;
   flex-shrink: 1;
-  overflow-x: hidden;
   column-gap: 2rem;
+  overflow: hidden;
+  position: relative;
 }
 </style>

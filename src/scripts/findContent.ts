@@ -56,7 +56,3 @@ export function getPathTree(pathMatch: string | string[]) {
   pathTree.unshift(null);
   return pathTree;
 }
-export function getPathTreeFromPath(path: string) {
-  const pathMatch = path.split('/').filter((i) => i);
-  return getPathTree(pathMatch);
-}

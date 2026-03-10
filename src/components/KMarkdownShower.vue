@@ -269,5 +269,48 @@ defineExpose({
       }
     }
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &::before {
+      opacity: 0.2;
+    }
+  }
+
+  @function repeat-character($char, $times) {
+    $result: '';
+
+    @for $i from 1 through $times {
+      $result: #{$result}#{$char};
+    }
+
+    @return '#{$result}';
+  }
+
+  @for $i from 1 through 6 {
+    h#{$i} {
+      &::before {
+        padding-right: #{0.2rem + (6-$i) * 0.1rem};
+        content: repeat-character('#', $i);
+      }
+    }
+  }
+
+  blockquote {
+    margin: 0 0 0 0.5rem;
+    padding: 1px 0 1px 0.5rem;
+
+    & p {
+      margin: 0.5rem 0 0.5rem 0;
+    }
+
+    @include theme.use {
+      background: rgba(theme.get('color'), 0.05);
+      border-left: 0.5rem solid rgba(theme.get('color'), 0.3);
+    }
+  }
 }
 </style>
