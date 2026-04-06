@@ -1,6 +1,6 @@
 <template>
   <div class="shower-root">
-    <div v-html="show" ref="shower" class="shower"></div>
+    <div v-html="show" ref="shower" class="shower" @click="handleClick"></div>
   </div>
 </template>
 <script setup lang="ts">
@@ -8,6 +8,8 @@ import data from '@/assets/fontello/data';
 import showdown from 'showdown';
 import hljs from 'highlight.js';
 import showdownKatex from 'showdown-katex';
+
+const router=useRouter();
 
 const props = withDefaults(
   defineProps<{
@@ -18,14 +20,54 @@ const props = withDefaults(
     headerLevelStart: 1,
   }
 );
-const shower = useTemplateRef('shower');
-
-function copyText(text: string) {
-  return navigator.clipboard.writeText(text);
+const copyText = (() =>
+  window.navigator?.clipboard?.writeText
+    ? (text: string) => window.navigator.clipboard.writeText(text)
+    : (text: string) => {
+        const input = document.createElement('input');
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+      })();
+function handleClick(event: MouseEvent) {
+  if (event.button !== 0) return;
+  const target = event.target as HTMLElement;
+  if (!target) return;
+  if (target.tagName === 'BUTTON' && target.classList.contains('copy-button')) {
+    copyCode(target as HTMLButtonElement);
+  }else if (target.tagName === 'A') {
+    handleLink(target as HTMLAnchorElement, event);
+  }
 }
-onMounted(() => {
-  shower.value?.addEventListener('click', copyCode);
-});
+function handleLink(target: HTMLAnchorElement, event: MouseEvent) {
+  if (event.defaultPrevented) return;
+  if (target.target && target.target !== '_self') return;
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  if (target.hasAttribute('download')) return;
+
+  const href = target.getAttribute('href');
+  if (!href) return;
+  const fullUrl = new URL(href, window.location.href.endsWith('/') ? window.location.href : window.location.href + '/');
+  if (fullUrl.origin !== window.location.origin) return;
+
+  event.preventDefault();
+  router.push(fullUrl.pathname + fullUrl.search);
+}
+function copyCode(target: HTMLButtonElement) {
+  if (target.dataset.code) copyText(target.dataset.code);
+  if (!target.parentElement) return;
+  const tipEle = target.parentElement.querySelector('.tip') as HTMLElement;
+  if (tipEle) {
+    tipEle.innerText = String.fromCharCode(data['tick']);
+    tipEle.classList.add('demo-icon');
+    setTimeout(() => {
+      tipEle.innerText = '复制';
+      tipEle.classList.remove('demo-icon');
+    }, 3000);
+  }
+}
 
 const converter = new showdown.Converter({
   parseImgDimensions: true,
@@ -36,7 +78,6 @@ const converter = new showdown.Converter({
   tables: true,
   tasklists: true,
   simpleLineBreaks: true,
-  openLinksInNewWindow: true,
   extensions: [
     showdownKatex({
       displayMode: true,
@@ -47,33 +88,16 @@ const converter = new showdown.Converter({
     }),
   ],
 });
-/**
- *
- * @param {MouseEvent} event
- */
-function copyCode(event: MouseEvent) {
-  const target = event.target as HTMLElement;
-  if ('code' in target.dataset) {
-    if (target.dataset.code) copyText(target.dataset.code);
-    const tipEle = target.querySelector('.tip') as HTMLElement;
-    console.log(target, tipEle);
-    if (tipEle) {
-      tipEle.innerText = String.fromCharCode(data['tick']);
-      tipEle.classList.add('demo-icon');
-      setTimeout(() => {
-        tipEle.innerText = '复制';
-        tipEle.classList.remove('demo-icon');
-      }, 3000);
-    }
-  }
-}
+
 function makeHtml(markdown: string) {
   return converter.makeHtml(markdown);
 }
+
 const show = computed(() => {
   const html = makeHtml(props.content);
   const tempEle = document.createElement('div');
   tempEle.innerHTML = html;
+
   const codeBlocks = [...tempEle.querySelectorAll('code')];
   for (const i of codeBlocks) {
     hljs.highlightElement(i);
@@ -91,22 +115,22 @@ const show = computed(() => {
         codeEle.style.setProperty('--language', `"${codeEle.classList[j].slice(9)}"`);
       }
     }
-    const copy = document.createElement('div');
+    const copyArea = document.createElement('div');
+    const copyButton = document.createElement('button');
+    copyButton.type = 'button';
     const tip = document.createElement('div');
-    copy.innerText = String.fromCharCode(data['copy']);
+    copyButton.innerText = String.fromCharCode(data['copy']);
     tip.innerText = '复制';
     tip.classList.add('tip');
-    copy.classList.add('copy-button');
-    copy.classList.add('demo-icon');
-    copy.dataset.code = codeEle.innerText;
-    copy.insertBefore(tip, copy.firstChild);
-    i.appendChild(copy);
+    copyButton.classList.add('copy-button');
+    copyButton.classList.add('demo-icon');
+    copyButton.dataset.code = codeEle.innerText;
+    copyArea.classList.add('copy-area');
+    copyArea.appendChild(copyButton);
+    copyArea.appendChild(tip);
+    i.appendChild(copyArea);
   }
   return tempEle.innerHTML;
-});
-
-defineExpose({
-  showBox: shower,
 });
 </script>
 <style lang="scss" scoped>
@@ -196,45 +220,12 @@ defineExpose({
   pre {
     position: relative;
   }
-
-  .copy-button {
+  .copy-area {
     position: absolute;
     top: 0px;
     right: 0px;
-    padding: 0.4rem;
-    margin: 0;
-    width: 14px;
-    line-height: 14px;
-    height: 14px;
-    margin: 0;
-    font-size: 1em;
-    border-width: 0.06rem;
-    border-style: solid;
-    border-color: transparent;
-    cursor: pointer;
-    @include motion.transition(0.3s);
-    user-select: none;
-
-    @include theme.use {
-      background: mixTheme('background', 'color', 85%, 0.5);
-      color: theme.get('color');
-    }
-
-    &:hover {
-      @include theme.use {
-        color: mixTheme('active-color', 'color', 85%);
-        border-color: mixTheme('active-color', 'color', 85%);
-      }
-
-      & > .tip {
-        opacity: 1;
-        transform: translate(-50%, -100%);
-      }
-    }
-
-    @include fontello.fontello;
-
-    & > .tip {
+    .tip {
+      @include fontello.fontello;
       position: absolute;
       padding: 0.5rem;
       top: -1rem;
@@ -268,7 +259,37 @@ defineExpose({
         transform: translate(-50%, 0);
       }
     }
+    .copy-button {
+      @include fontello.fontello;
+      padding: 0.15rem;
+      margin: 0;
+      font-size: 1em;
+      border-width: 0.06rem;
+      border-style: solid;
+      border-color: transparent;
+      cursor: pointer;
+      @include motion.transition(0.3s);
+      user-select: none;
+
+      @include theme.use {
+        background: theme.mix('background', 'color', 85%, 0.5);
+        color: theme.get('color');
+      }
+
+      &:hover {
+        @include theme.use {
+          color: theme.mix('active-color', 'color', 85%);
+          border-color: theme.mix('active-color', 'color', 85%);
+        }
+
+        & + .tip {
+          opacity: 1;
+          transform: translate(-50%, -100%);
+        }
+      }
+    }
   }
+
   h1,
   h2,
   h3,

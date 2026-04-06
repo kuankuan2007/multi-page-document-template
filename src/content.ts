@@ -16,13 +16,13 @@ const content: ArticleOptions = {
       article: 'detail/index.md',
       title: '项目细节',
       subArticles: {
-        theme: {
-          article: 'detail/theme.md',
-          title: '主题',
-        },
         content: {
           article: 'detail/content.md',
           title: '内容系统',
+        },
+        theme: {
+          article: 'detail/theme.md',
+          title: '主题',
         },
         tooling: {
           article: 'detail/tooling.md',
