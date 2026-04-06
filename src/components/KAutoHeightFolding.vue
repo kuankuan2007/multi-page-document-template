@@ -6,7 +6,9 @@
     }"
     ref="foldBox"
   >
-    <slot />
+    <div class="fold-item">
+      <slot />
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -23,9 +25,14 @@ const props = withDefaults(
 .fold-box {
   display: grid;
   grid-template-rows: 1fr;
+  @include motion.transition(grid-template-rows 0.3s);
+
   overflow: hidden;
   &.fold {
-    grid-template-rows: 0;
+    grid-template-rows: 0fr;
+  }
+  .fold-item{
+    overflow: hidden;
   }
 }
 </style>
