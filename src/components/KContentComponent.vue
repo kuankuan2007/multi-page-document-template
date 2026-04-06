@@ -73,7 +73,7 @@ watch(
   border-radius: 999px;
   padding: 2px;
   display: block;
-  transition: 0.3s;
+  @include motion.transition(0.3s);
 
   &:hover {
     @include theme.use {

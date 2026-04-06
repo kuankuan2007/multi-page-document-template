@@ -3,7 +3,7 @@ import './content.ts';
 import '@/styles/main.scss';
 
 import App from './App.vue';
-import '@kuankuan/assist-2026/theme';
+import '@kuankuan/assist-2026/init';
 import router from './router';
 
 const app = createApp(App);

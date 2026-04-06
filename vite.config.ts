@@ -10,6 +10,12 @@ import postcssPresetEnv from 'postcss-preset-env';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
+const sassAddition = `
+@use '@/styles/theme.scss';
+@use '@kuankuan/assist-2026/styles/motion.scss';
+@use 'sass:math';
+@use 'sass:color';`;
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -38,11 +44,13 @@ export default defineConfig({
         }),
         cssnano(),
       ],
-    }, 
+    },
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/theme.scss";
-@use "sass:color";`,
+        additionalData: sassAddition,
+      },
+      sass: {
+        additionalData: sassAddition,
       },
     },
   },

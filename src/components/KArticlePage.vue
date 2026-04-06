@@ -87,11 +87,11 @@ const blockInfoContent = {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    transition: 0.3s;
+    @include motion.transition(0.3s);
 
     column-gap: 0rem;
     .next-button-icon {
-      transition: 0.3s;
+      @include motion.transition(0.3s);
     }
   }
   &:hover {

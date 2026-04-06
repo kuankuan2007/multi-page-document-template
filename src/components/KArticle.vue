@@ -158,7 +158,7 @@ watch(
   opacity: 1;
   &.page-enter-active,
   &.page-leave-active {
-    transition: 0.3s;
+    @include motion.transition(0.3s);
   }
   &.page-enter-from {
     transform: translateX(100%);

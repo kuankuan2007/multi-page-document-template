@@ -120,7 +120,7 @@ defineExpose({
     margin-left: 5px;
     margin-right: 5px;
     padding-right: 5px;
-    transition: 0.3s;
+    @include motion.transition(0.3s);
     background-color: #8881;
 
     .katex-display & {
@@ -136,7 +136,7 @@ defineExpose({
     padding: 0.8em 0;
     padding-top: 1.1em;
     margin: 0.2em 0.2em;
-    transition: 0.3s;
+    @include motion.transition(0.3s);
     position: relative;
 
     &::before {
@@ -147,7 +147,7 @@ defineExpose({
       font-size: 0.3em;
       pointer-events: none;
       font-weight: normal;
-      transition: 0.3s;
+      @include motion.transition(0.3s);
       padding: 0.2rem 0.5rem;
       height: 16px;
       line-height: 16px;
@@ -159,7 +159,7 @@ defineExpose({
   }
 
   code {
-    transition: 0.3s;
+    @include motion.transition(0.3s);
     font-family: 'Fira Code', 'Monaspace Neon', sans-serif;
     font-weight: lighter;
     font-size: 1em;
@@ -167,7 +167,7 @@ defineExpose({
   }
 
   code * {
-    transition: 0.3s;
+    @include motion.transition(0.3s);
   }
 
   pre > code.hljs {
@@ -183,7 +183,7 @@ defineExpose({
     font-size: 0.3em;
     pointer-events: none;
     font-weight: normal;
-    transition: 0.3s;
+    @include motion.transition(0.3s);
     padding: 0.2rem 0.5rem;
     height: 16px;
     line-height: 16px;
@@ -212,7 +212,7 @@ defineExpose({
     border-style: solid;
     border-color: transparent;
     cursor: pointer;
-    transition: 0.3s;
+    @include motion.transition(0.3s);
     user-select: none;
 
     @include theme.use {
