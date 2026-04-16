@@ -104,13 +104,10 @@ export type ArticleOptions = {
 
 1. 把你的 Markdown 放到 `src/articles/`（可用子目录）
 2. 修改 `src/content.ts`：
-
   - 替换根节点的 `article` 与 `title`
   - 替换/新增 `subArticles`
-
 3. 删除或保留示例文章：
-
-- 删除不再使用的 `.md` 并不会影响运行，只要 `content.ts` 不再引用它们
+  - 删除不再使用的 `.md` 并不会影响运行，只要 `content.ts` 不再引用它们
 
 ### 4.2 新增一个二级章节（示例）
 
