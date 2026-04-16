@@ -9,19 +9,20 @@
     "preview": "vite preview",
     "load-fontello": "load-fontello",
     "format": "prettier --write src/",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "clear": "clear-vite-deps"
   },
   "dependencies": {
-    "@kuankuan/assist-2026": "^0.1.14",
+    "@kuankuan/k-markdown-parser": "^1.3.3",
+    "@kuankuan/k-markdown-vue": "^0.1.4",
     "highlight.js": "^11.11.1",
     "jiti": "^2.6.1",
     "katex": "^0.16.45",
-    "showdown": "^2.1.0",
-    "showdown-katex": "^0.6.0",
     "vue": "^3.5.32",
     "vue-router": "^5.0.4"
   },
   "devDependencies": {
+    "@kuankuan/assist-2026": "^0.1.15",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^25.6.0",
     "@types/showdown": "^2.0.6",
@@ -35,7 +36,7 @@
     "eslint": "^10.2.0",
     "eslint-plugin-vue": "^10.8.0",
     "postcss-preset-env": "^11.2.1",
-    "prettier": "^3.8.2",
+    "prettier": "^3.8.3",
     "rollup-plugin-visualizer": "^7.0.1",
     "sass": "^1.99.0",
     "terser": "^5.46.1",
