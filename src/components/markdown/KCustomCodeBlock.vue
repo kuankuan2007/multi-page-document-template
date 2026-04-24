@@ -3,7 +3,6 @@
     <template #assistant="{ lang, code }">
       <div class="assistant">
         <div class="lang">{{ lang }}</div>
-
         <button
           class="copy-code"
           @click="
@@ -37,7 +36,7 @@ const copied = ref(false);
 </script>
 <style scoped lang="scss">
 .k-md-ele-code-block {
-  padding: 1em;
+  padding: 1em 1em 0 1em;
   @include theme.use {
     background-color: theme.mix('active-color', 'background', 2%);
     border-color: theme.mix('color', 'background', 10%);
