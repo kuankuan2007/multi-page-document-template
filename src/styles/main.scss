@@ -29,36 +29,3 @@ a {
     );
   }
 }
-$scrollbar-width: 10px;
-
-::-webkit-scrollbar {
-  width: $scrollbar-width;
-  height: $scrollbar-width;
-  @include theme.use {
-    background: theme.get('background');
-  }
-}
-::-webkit-scrollbar-button {
-  display: none;
-  @include theme.use {
-    background-color: transparent;
-  }
-}
-::-webkit-scrollbar-track {
-  @include theme.use {
-    background-color: transparent;
-  }
-}
-::-webkit-scrollbar-track-piece {
-  @include theme.use {
-    background-color: transparent;
-  }
-}
-::-webkit-scrollbar-thumb {
-  @include theme.use {
-    background-color: theme.get('color');
-    border-radius: 99999px;
-    width: $scrollbar-width;
-    height: $scrollbar-width;
-  }
-}
