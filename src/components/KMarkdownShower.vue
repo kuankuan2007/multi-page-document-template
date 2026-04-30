@@ -1,5 +1,6 @@
 <template>
   <k-markdown-vue
+    class="k-markdown-shower"
     :value="content"
     :options="{
       components: {

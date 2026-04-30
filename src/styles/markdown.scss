@@ -5,50 +5,57 @@ html[data-theme='light'] {
 html[data-theme='dark'] {
   @include meta.load-css('highlight.js/scss/monokai-sublime');
 }
+.k-markdown-shower {
+  code {
+    font-family: 'monaspace neon', 'fira code', monospace;
+  }
 
-code {
-  font-family: 'monaspace neon', 'fira code', monospace;
-}
-
-.k-md-node-code-inline {
-  padding: 0.1em 0.3em;
-  border-radius: 0.3em;
-  font-size: 0.95em;
-  @include theme.use {
-    background-color: theme.mix('active-color', 'background', 10%);
-  }
-}
-blockquote {
-  margin: 0;
-  padding: 0.5em 1em;
-  border-left: solid 0.8em rgba(white, 0.1);
-  border-radius: 0.5em;
-  background-color: rgba(black, 0.2);
-  blockquote {
-    margin-left: -0.5em;
-    padding-right: 0;
-  }
-}
-@function repeat-string($str, $num) {
-  $result: '';
-  @for $i from 1 through $num {
-    $result: $result + $str;
-  }
-  @return $result;
-}
-@for $i from 1 through 6 {
-  h#{$i} {
-    &::before {
-      content: repeat-string('#', $i) + ' ';
-      opacity: 0.5;
-      -webkit-user-select: none;
-      user-select: none;
+  .k-md-node-code-inline {
+    padding: 0.1em 0.3em;
+    border-radius: 0.3em;
+    font-size: 0.95em;
+    @include theme.use {
+      background-color: theme.mix('active-color', 'background', 10%);
     }
   }
-}
-table {
-  border-collapse: collapse;
-  td {
-    border: 1px solid rgba(white, 0.5);
+  blockquote {
+    margin: 0;
+    padding: 0.5em 1em;
+    border-left: solid 0.8em rgba(white, 0.1);
+    border-radius: 0.5em;
+    background-color: rgba(black, 0.2);
+    blockquote {
+      margin-left: -0.5em;
+      padding-right: 0;
+    }
+  }
+  @function repeat-string($str, $num) {
+    $result: '';
+    @for $i from 1 through $num {
+      $result: $result + $str;
+    }
+    @return $result;
+  }
+  @for $i from 1 through 6 {
+    h#{$i} {
+      &::before {
+        content: repeat-string('#', $i) + ' ';
+        opacity: 0.5;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+    }
+  }
+  table {
+    border-collapse: collapse;
+    &:has(tr > td) {
+      td,
+      th {
+        padding: 0.5em 1em;
+        @include theme.use {
+          border: solid 1px theme.mix('active-color', 'background', 10%);
+        }
+      }
+    }
   }
 }

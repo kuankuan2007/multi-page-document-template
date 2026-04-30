@@ -1,8 +1,16 @@
 <template>
   <k-markdown-code-block :node="node">
-    <template #assistant="{ lang, code }">
+    <template #assistant="{ info, code, node }">
       <div class="assistant">
-        <div class="lang">{{ lang }}</div>
+        <div
+          class="lang"
+          :class="{
+            'unsupported-lang': !info?.langSupported,
+            illegal: info?.illegal,
+          }"
+        >
+          {{ node.args.language || info?.usingLang || 'unknown' }}
+        </div>
         <button
           class="copy-code"
           @click="

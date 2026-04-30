@@ -10,6 +10,8 @@
 
 ## 更新
 
+2026年4月30日: Markdown 渲染引擎从 showdown 全面切换为自研的 [@kuankuan/k-markdown-parser](https://github.com/kuankuan2007/k-markdown-parser) + [@kuankuan/k-markdown-vue](https://github.com/kuankuan2007/k-markdown-vue)，实现基于 AST 的 Vue 原生渲染，支持 LaTeX、代码高亮与自定义节点组件。
+
 2026年3月9日: 这个项目进行了完全重构，并重新发布
 
 ## 文档
