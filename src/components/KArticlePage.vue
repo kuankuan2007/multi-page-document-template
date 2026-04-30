@@ -112,10 +112,12 @@ const blockInfoContent = {
   padding: 1rem;
   font-size: 2em;
   font-weight: bold;
-  color: theme.get('color');
   height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  @include theme.use {
+    color: theme.get('color');
+  }
 }
 </style>
