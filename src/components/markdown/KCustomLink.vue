@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="k-md-ele-router-link"
-    v-if="linkContent.href"
+    v-if="linkContent.inSite"
     :to="linkContent.href"
     :title="props.node.args.alt"
     ><slot
@@ -29,7 +29,6 @@ const linkContent = computed(() => {
     href,
     window.location.href.endsWith('/') ? window.location.href : window.location.href + '/'
   );
-
   return fullUrl.origin === window.location.origin
     ? { inSite: true, href: fullUrl.pathname + fullUrl.search + fullUrl.hash }
     : { inSite: false, href: fullUrl.href };
