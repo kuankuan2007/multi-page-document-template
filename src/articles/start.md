@@ -24,7 +24,7 @@ nvm use
 ## 安装依赖
 
 ```bash
-npm i
+pnpm install
 ```
 
 **注意** : 本项目中存在对等依赖兼容性问题，目前该依赖作者未提供解决方案，敬请谅解。
@@ -32,7 +32,7 @@ npm i
 ## 启动项目
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## 个性化配置

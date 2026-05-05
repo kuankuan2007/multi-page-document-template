@@ -4,23 +4,23 @@
 
 ---
 
-## 1. npm scripts 一览
+## 1. pnpm scripts 一览
 
 来自 `package.json`：
 
-- `npm run dev`
+- `pnpm dev`
   - 启动 Vite 开发服务器
-- `npm run build`
+- `pnpm build`
   - 执行 `vite build`
-- `npm run preview`
+- `pnpm preview`
   - 本地预览构建产物
-- `npm run lint`
+- `pnpm lint`
   - 执行 `eslint . --fix`
   - **会自动修复**可修复的问题
-- `npm run format`
+- `pnpm format`
   - 执行 `prettier --write src/`
   - 只格式化 `src/` 下的文件
-- `npm run load-fontello`
+- `pnpm load-fontello`
   - 执行 `load-fontello`
   - 这是来自 `@kuankuan/assist-2026` 提供的 bin：用于把 fontello 配置产物同步/生成到项目内（配合 `src/assets/fontello/`）
 
@@ -47,7 +47,7 @@
 
 执行方式：
 
-- `npm run lint` 等价于 `eslint . --fix`
+- `pnpm lint` 等价于 `eslint . --fix`
 
 ---
 
@@ -64,7 +64,7 @@
 
 执行方式：
 
-- `npm run format` 会对 `src/` 进行覆盖式格式化
+- `pnpm format` 会对 `src/` 进行覆盖式格式化
 
 ---
 

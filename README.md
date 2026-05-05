@@ -12,8 +12,8 @@ Tutorials, configuration and detailed guides: [Example](https://multi-page-docum
 Developed on Node `24.14.0` (see `.nvmrc`).
 
 ```bash
-npm i
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ---

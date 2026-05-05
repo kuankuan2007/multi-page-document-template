@@ -17,8 +17,8 @@
 本项目在 Node `24.14.0` 上开发（见 `.nvmrc`）。
 
 ```bash
-npm i
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ---
