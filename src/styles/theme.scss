@@ -11,3 +11,8 @@
 @function mix($value1, $value2, $ratio: 50%, $alpha: 1) {
   @return theme.mix($value1, $value2, $ratio, $alpha);
 }
+@mixin select($theme) {
+  @include theme.select($theme) {
+    @content;
+  }
+}
