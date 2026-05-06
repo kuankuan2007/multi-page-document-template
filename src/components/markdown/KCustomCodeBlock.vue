@@ -57,7 +57,10 @@ const copied = ref(false);
 </script>
 <style scoped lang="scss">
 .k-md-ele-code-block {
-  padding: 1em 1em 0 1em;
+  &:deep(.k-md-ele-code-block-inner) {
+    padding: 1em 1em 0 1em;
+    overflow-x: auto;
+  }
   @include theme.use {
     background-color: theme.mix('active-color', 'background', 2%);
     border-color: theme.mix('color', 'background', 10%);

@@ -15,8 +15,8 @@ importers:
         specifier: ^1.3.5
         version: 1.3.5
       '@kuankuan/k-markdown-vue':
-        specifier: ^0.1.7
-        version: 0.1.7(highlight.js@11.11.1)(typescript@6.0.3)
+        specifier: ^0.1.8
+        version: 0.1.8(highlight.js@11.11.1)(typescript@6.0.3)
       flourite:
         specifier: ^1.3.0
         version: 1.3.0
@@ -667,8 +667,8 @@ packages:
   '@kuankuan/k-markdown-parser@1.3.5':
     resolution: {integrity: sha512-3eVVA1WAGBl8CN02aPr84LJzVs7yyNEXQQfb9SrDdHOaK1KKhiLOIvNiFCHIJ7JePcrai8QBPmAGsCQSjWYfDg==}
 
-  '@kuankuan/k-markdown-vue@0.1.7':
-    resolution: {integrity: sha512-jzkRXReukyY9YYdgQ/zVTDWnoFiRCQdF1Qpcew1yOCegpkrls5u8mB5FaVb9+7MVL2pkoQTZenaDTn6ieUZtHg==}
+  '@kuankuan/k-markdown-vue@0.1.8':
+    resolution: {integrity: sha512-SKgl5a+EuUfPXWBx/cuszEFFz5aD1igC6qLqhqvC2uyYNmSE8l6kjpAvHx5qOx8jyEgRyHmG7A75kjaajcWZcA==}
     peerDependencies:
       highlight.js: '>=11.0.0'
     peerDependenciesMeta:
@@ -3486,7 +3486,7 @@ snapshots:
 
   '@kuankuan/k-markdown-parser@1.3.5': {}
 
-  '@kuankuan/k-markdown-vue@0.1.7(highlight.js@11.11.1)(typescript@6.0.3)':
+  '@kuankuan/k-markdown-vue@0.1.8(highlight.js@11.11.1)(typescript@6.0.3)':
     dependencies:
       '@kuankuan/k-markdown-parser': 1.3.5
       katex: 0.16.45
