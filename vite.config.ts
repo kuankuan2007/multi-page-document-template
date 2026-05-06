@@ -127,6 +127,14 @@ export default defineConfig({
           if (chunk.facadeModuleId?.includes('node_modules/shiki/dist/themes')) {
             return 'script/shiki/themes/[name]-[hash].js';
           }
+          if (chunk.facadeModuleId?.includes('src/articles')) {
+            const rPath = path.relative(
+              path.resolve(dirname, 'src/articles'),
+              chunk.facadeModuleId!
+            );
+            const prefix = path.join('articles', path.dirname(rPath));
+            return `${prefix}/[name]-[hash].js`;
+          }
           return 'script/[name]-[hash].js';
         },
         assetFileNames: function (chunkInfo) {
