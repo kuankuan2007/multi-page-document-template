@@ -8,6 +8,7 @@
         'code-block': KCustomCodeBlock as never,
         link: KCustomLink as never,
       },
+      highlight: highlighterByShiki,
     }"
   />
 </template>
@@ -17,6 +18,7 @@ import defaultComponents from '@kuankuan/k-markdown-vue/src/nodesEle/default';
 import '@/styles/markdown.scss';
 import KCustomCodeBlock from './markdown/KCustomCodeBlock.vue';
 import KCustomLink from './markdown/KCustomLink.vue';
+import { highlighterByShiki } from '@/scripts/codeHighlight';
 withDefaults(
   defineProps<{
     headerLevelStart?: number;

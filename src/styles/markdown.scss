@@ -1,11 +1,33 @@
 @use 'sass:meta';
 
 .k-markdown-shower {
-  @include theme.select('light') {
-    @include meta.load-css('highlight.js/scss/vs');
-  }
-  @include theme.select('dark') {
-    @include meta.load-css('highlight.js/scss/monokai-sublime');
+  .k-md-ele-code-block {
+    &.hljs {
+      @include theme.select('light') {
+        @include meta.load-css('highlight.js/scss/github');
+      }
+      @include theme.select('dark') {
+        @include meta.load-css('highlight.js/scss/github-dark');
+      }
+    }
+    &.shiki {
+      @include theme.select('dark') {
+        span {
+          color: var(--shiki-dark);
+          font-style: var(--shiki-dark-font-style);
+          font-weight: var(--shiki-dark-font-weight);
+          text-decoration: var(--shiki-dark-text-decoration);
+        }
+      }
+      @include theme.select('light') {
+        span {
+          color: var(--shiki-light);
+          font-style: var(--shiki-light-font-style);
+          font-weight: var(--shiki-light-font-weight);
+          text-decoration: var(--shiki-light-text-decoration);
+        }
+      }
+    }
   }
 
   code {

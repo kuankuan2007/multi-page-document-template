@@ -1,6 +1,5 @@
 import { fileURLToPath, URL } from 'node:url';
 import path from 'node:path';
-
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueDevTools from 'vite-plugin-vue-devtools';
@@ -10,7 +9,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import postcssPresetEnv from 'postcss-preset-env';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-
+import VitePluginShikiAutoImport from './vite-plugin/kShikiAutoImport';
 const sassAddition = `
 @use '@/styles/theme.scss';
 @use '@kuankuan/assist-2026/styles/motion.scss';
@@ -52,6 +51,27 @@ export default defineConfig({
       emitFile: false,
       filename: './temp/test.html',
       open: true,
+    }),
+    VitePluginShikiAutoImport({
+      lang: {
+        static: ['typescript', 'javascript', 'bash', 'css'],
+        dynamic: [
+          'python',
+          'rust',
+          'go',
+          'java',
+          'c',
+          'cpp',
+          'html',
+          'scss',
+          'json',
+          'vue',
+          'markdown',
+        ],
+      },
+      theme: {
+        static: ['github-light', 'github-dark'],
+      },
     }),
   ],
   css: {
@@ -100,7 +120,13 @@ export default defineConfig({
           ).slice(1);
           return pathName;
         },
-        chunkFileNames: function () {
+        chunkFileNames: function (chunk) {
+          if (chunk.facadeModuleId?.includes('node_modules/shiki/dist/langs')) {
+            return 'script/shiki/langs/[name]-[hash].js';
+          }
+          if (chunk.facadeModuleId?.includes('node_modules/shiki/dist/themes')) {
+            return 'script/shiki/themes/[name]-[hash].js';
+          }
           return 'script/[name]-[hash].js';
         },
         assetFileNames: function (chunkInfo) {

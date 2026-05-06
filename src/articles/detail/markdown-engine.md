@@ -93,7 +93,7 @@ const parser = new KMarkdownParser({
 | **Vue 3 + TypeScript** | 完整类型支持，与 Vue 3 生态深度集成 |
 | **基于 AST 渲染** | 通过 `@kuankuan/k-markdown-parser` 产出的 AST 驱动渲染，而非 `v-html` |
 | **内置 LaTeX 支持** | 集成 KaTeX，通过 `options.latex` 配置（按需开启） |
-| **内置代码高亮** | 集成 highlight.js，自带主题 CSS |
+| **可拔插的代码高亮** | 基于 `HighlightInterface`，模板不仅使用了 highlight.js，进一步重构采用 shiki + highlight.js 兜底策略，请参考 [代码高亮机制](./highlight) |
 | **安全的 XML 处理** | 默认以 `'warn'` 方式处理 XML 节点，防止 XSS |
 | **完全可替换的渲染器** | 每种节点类型均可通过 `options.components` 注入自定义 Vue 组件 |
 
