@@ -6,7 +6,7 @@
 
 渲染代码块时，内部会经历这套高亮分析系统（核心位于 `src/scripts/codeHighlight.ts`），按照以下流程进行：
 
-1. **推断语言**：若代码块包含语言指定（如 \`\`\`ts \），则优先使用；若未包含，则使用 `flourite` 进行语言猜测。
+1. **推断语言**：若代码块包含语言指定（如 \`\`\`ts），则优先使用；若未包含，则使用 `flourite` 进行语言猜测。
 2. **第一优先级 (`shiki`)**：调用通过 Vite 插件注入的 `getShikiWithLang` 进行渲染。`shiki` 基于 TextMate 语法，能提供与 VS Code 完全一致、极具表现力的精准颜色渲染。并自动结合深色和浅色主题。
 3. **兜底渲染 (`highlight.js`)**：若 `shiki` 中未配置该语言的支持文件（或抛出错误），则回退使用 `highlight.js` 进行渲染。即使指定的语言不支持，也会使用 `highlight.js` 的 `highlightAuto` 自动尽力适配。
 4. **渲染组件**：最终由自定义组件 `KCustomCodeBlock.vue` 显示高亮结果。
