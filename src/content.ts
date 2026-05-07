@@ -28,6 +28,10 @@ const content: ArticleOptions = {
           article: 'detail/markdown-engine.md',
           title: 'Markdown 渲染引擎',
         },
+        highlight: {
+          article: 'detail/highlight.md',
+          title: '代码高亮',
+        },
         tooling: {
           article: 'detail/tooling.md',
           title: '工程化',

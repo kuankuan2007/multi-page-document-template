@@ -1,5 +1,12 @@
 <template>
-  <k-markdown-code-block :node="node">
+  <k-markdown-code-block
+    :node="node"
+    @resolve-info="handleResolveInfo"
+    :class="{
+      hljs: info?.highlightBy === 'hljs',
+      shiki: info?.highlightBy === 'shiki',
+    }"
+  >
     <template #assistant="{ info, code, node }">
       <div class="assistant">
         <div
@@ -31,9 +38,15 @@ import type { KMarkdownCodeBlockNode } from '@kuankuan/k-markdown-parser/nodes/c
 import KMarkdownCodeBlock from '@kuankuan/k-markdown-vue/src/nodesEle/KMdEleCodeBlock.vue';
 import { copyText } from '@kuankuan/assist-2026/utils';
 import KIcon from '../KIcon.vue';
+import type { HighlighterInfoByShiki } from '@/scripts/codeHighlight';
+import type { HighlighterInfo } from '@kuankuan/k-markdown-vue/src/supports/highlight';
 defineProps<{
   node: KMarkdownCodeBlockNode;
 }>();
+const info = ref<HighlighterInfoByShiki | undefined>(undefined);
+function handleResolveInfo(newInfo: HighlighterInfo) {
+  info.value = newInfo as HighlighterInfoByShiki;
+}
 let last: number;
 function setCopied() {
   clearTimeout(last);
@@ -44,7 +57,10 @@ const copied = ref(false);
 </script>
 <style scoped lang="scss">
 .k-md-ele-code-block {
-  padding: 1em 1em 0 1em;
+  &:deep(.k-md-ele-code-block-inner) {
+    padding: 1em 1em 0 1em;
+    overflow-x: auto;
+  }
   @include theme.use {
     background-color: theme.mix('active-color', 'background', 2%);
     border-color: theme.mix('color', 'background', 10%);
@@ -53,7 +69,6 @@ const copied = ref(false);
   border-radius: 0.5em;
   position: relative;
   overflow: hidden;
-
   .lang {
     align-items: center;
     font-size: 0.8em;
