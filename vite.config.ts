@@ -16,14 +16,14 @@ const sassAddition = `
 @use 'sass:math';
 @use 'sass:color';`;
 const dirname = import.meta.dirname.replaceAll('\\', '/');
-function getNodeModulesPath(name: string) {
-  return path.posix.join(dirname, 'node_modules', name);
+function getNodeModulesPath(name: string): RegExp {
+  return new RegExp(`node_modules/.+${name}/`);
 }
 
 const chunkConfig = {
   markdown: [
-    getNodeModulesPath('showdown'),
-    getNodeModulesPath('showdown-katex'),
+    getNodeModulesPath('@kuankuan+k-markdown-parser'),
+    getNodeModulesPath('@kuankuan+k-markdown-vue'),
     getNodeModulesPath('katex'),
   ],
   hightlight: [getNodeModulesPath('highlight.js')],
@@ -109,7 +109,9 @@ export default defineConfig({
           groups: Object.entries(chunkConfig).map(([key, value]) => ({
             name: key,
             test: (id) => {
-              return value.some((item) => id.startsWith(item));
+              return value.some((item) =>
+                typeof item === 'string' ? id.startsWith(item) : item.test(id)
+              );
             },
           })),
         },
@@ -132,7 +134,7 @@ export default defineConfig({
               path.resolve(dirname, 'src/articles'),
               chunk.facadeModuleId!
             );
-            const prefix = path.join('articles', path.dirname(rPath));
+            const prefix = path.join('articles', path.dirname(rPath)).replace(/\\/g, '/');
             return `${prefix}/[name]-[hash].js`;
           }
           return 'script/[name]-[hash].js';
