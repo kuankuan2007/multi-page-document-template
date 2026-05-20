@@ -26,7 +26,7 @@ const options = reactive({
     link: KCustomLink as never,
   }),
   highlight: highlighterByShiki,
-  latex: 'warn',
+  latex: "show",
 } as KMarkdownVueOptions); 
 
 </script>
