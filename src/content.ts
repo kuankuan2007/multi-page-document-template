@@ -24,6 +24,10 @@ const content: ArticleOptions = {
           article: 'detail/theme.md',
           title: '主题',
         },
+        icon: {
+          article: 'detail/icon.md',
+          title: 'Icon 系统',
+        },
         'markdown-engine': {
           article: 'detail/markdown-engine.md',
           title: 'Markdown 渲染引擎',

@@ -20,9 +20,10 @@
 - `pnpm format`
   - 执行 `prettier --write src/`
   - 只格式化 `src/` 下的文件
-- `pnpm load-fontello`
+- `pnpm run load-fontello`
   - 执行 `load-fontello`
   - 这是来自 `@kuankuan/assist-2026` 提供的 bin：用于把 fontello 配置产物同步/生成到项目内（配合 `src/assets/fontello/`）
+  - 图标的使用方式与更新流程，建议结合[Icon 系统](./icon)一起看
 
 开发环境建议（见 README）：
 
