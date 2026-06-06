@@ -12,11 +12,11 @@ importers:
         specifier: ^0.1.16
         version: 0.1.16(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(jiti@2.7.0)(sass@1.99.0)(terser@5.46.2)(yaml@2.8.4))
       '@kuankuan/k-markdown-parser':
-        specifier: ^1.3.6
-        version: 1.3.6
+        specifier: ^1.3.8
+        version: 1.3.8
       '@kuankuan/k-markdown-vue':
-        specifier: ^0.1.11
-        version: 0.1.11(highlight.js@11.11.1)(typescript@6.0.3)
+        specifier: ^0.1.13
+        version: 0.1.13(highlight.js@11.11.1)(typescript@6.0.3)
       flourite:
         specifier: ^1.3.0
         version: 1.3.0
@@ -664,11 +664,11 @@ packages:
     peerDependencies:
       vite: '>=7.0.0'
 
-  '@kuankuan/k-markdown-parser@1.3.6':
-    resolution: {integrity: sha512-I+zsEVZdj+kw8JGUWbKgD0wlS14fiSHRXacM/PZ3BCDvjCgMcDhL+s/P4huQREQgD/Dz6mgIxRIznOfrZgN3dw==}
+  '@kuankuan/k-markdown-parser@1.3.8':
+    resolution: {integrity: sha512-6q3i1s85bGUUn5r8alL2Qhk3juU22/QBAl4cE0+exbNsaW1Rdaco1AbTn3NMqNps8EnZJlk14I39jEX2cQjC1Q==}
 
-  '@kuankuan/k-markdown-vue@0.1.11':
-    resolution: {integrity: sha512-5+Hpt47onXR+zWnJZ2SN2EF++8DtNLiQuFORdY0LJzNvgHdfOjKT/DmZtbgE5EO84zbbthUIIrSvArK8pYTcpw==}
+  '@kuankuan/k-markdown-vue@0.1.13':
+    resolution: {integrity: sha512-cKWfyiQGG4LIEp6JE8JCOEoFIC7E75DxxzerdDX7ghwES2O24huLoaro5rkCMib5mlDt8sxnXxI/VsyLcMLwcg==}
     peerDependencies:
       highlight.js: '>=11.0.0'
     peerDependenciesMeta:
@@ -1806,6 +1806,10 @@ packages:
 
   katex@0.16.45:
     resolution: {integrity: sha512-pQpZbdBu7wCTmQUh7ufPmLr0pFoObnGUoL/yhtwJDgmmQpbkg/0HSVti25Fu4rmd1oCR6NGWe9vqTWuWv3GcNA==}
+    hasBin: true
+
+  katex@0.17.0:
+    resolution: {integrity: sha512-Vdw0ATsQ9V+LuegM/BTwQqV/6cTl5lbGcIrU+BCgLxyf6bo38ybOr372tuSIxir3CN720flu1meYR6XzNMwQnw==}
     hasBin: true
 
   keyv@4.5.4:
@@ -3519,12 +3523,12 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@kuankuan/k-markdown-parser@1.3.6': {}
+  '@kuankuan/k-markdown-parser@1.3.8': {}
 
-  '@kuankuan/k-markdown-vue@0.1.11(highlight.js@11.11.1)(typescript@6.0.3)':
+  '@kuankuan/k-markdown-vue@0.1.13(highlight.js@11.11.1)(typescript@6.0.3)':
     dependencies:
-      '@kuankuan/k-markdown-parser': 1.3.6
-      katex: 0.16.45
+      '@kuankuan/k-markdown-parser': 1.3.8
+      katex: 0.17.0
       vue: 3.5.35(typescript@6.0.3)
     optionalDependencies:
       highlight.js: 11.11.1
@@ -4669,6 +4673,10 @@ snapshots:
   json5@2.2.3: {}
 
   katex@0.16.45:
+    dependencies:
+      commander: 8.3.0
+
+  katex@0.17.0:
     dependencies:
       commander: 8.3.0
 
