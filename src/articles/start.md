@@ -45,6 +45,10 @@ pnpm dev
 - `article`: 文档名称（文档放在 `src/articles`目录下），如：`start.md`
 - `subArticles`: 子文档列表
 
+### Header 链接
+
+Header 右侧的图标链接（如 GitHub 按钮）在 `src/headerConfig.ts` 中配置，每个条目包含 `icon`（图标 id）和 `href`（目标 URL）两个字段，详见 [Header 自定义链接](detail/header)。
+
 ### 主题
 
 本项目所有主题相关的配置使用[@kuankuan/assist-2026](https://github.com/kuankuan2007/assist-2026)库中提供的代码，这也是宽宽几乎所有项目都在使用的主题管理方式。

@@ -28,6 +28,10 @@ const content: ArticleOptions = {
           article: 'detail/icon.md',
           title: 'Icon 系统',
         },
+        header: {
+          article: 'detail/header.md',
+          title: 'Header 自定义链接',
+        },
         'markdown-engine': {
           article: 'detail/markdown-engine.md',
           title: 'Markdown 渲染引擎',
